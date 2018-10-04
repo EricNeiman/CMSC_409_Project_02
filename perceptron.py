@@ -11,10 +11,13 @@ class Perceptron:
         for x in range(0, num_weights):
             self.weights.append(random.random() * 2 - 1)
 
+        print(self.weights)
+
     def feed_forward(self, inputs):
-        sum = 0
+        sum = 0.0
         # multiply inputs by weights and sum them
         for x in range(0, len(self.weights)):
+            print(inputs[x])
             sum += self.weights[x] * inputs[x]
         # return the 'activated' sum
         return self.activate(sum)
@@ -36,46 +39,43 @@ class Perceptron:
 class Trainer:
 
     def __init__(self):
-        self.perceptron = Perceptron(0.01, 3)
+        self.perceptron = Perceptron(0.1, 3)
 
-    def f(self, x):
-        return 0.5 * x + 10  # line: f(x) = 0.5x + 10
+    def train(self, iterations):
+        training_data = open("data.txt")
+        training_points = []
 
-    def train(self):
-        for x in range(0, 1000000):
-            x_coord = random.random() * 500 - 250
-            y_coord = random.random() * 500 - 250
-            line_y = self.f(x_coord)
+        i = 0
+        while i < 4000:
+            data_line = training_data.readline().strip("\n").split(",")
+            data_tuple = (data_line.pop(0), data_line.pop(0), data_line.pop(0))
+            training_points.append(data_tuple)
+            if iterations == 1000 & i == 499:
+                i += 1501  # jumps to the start of females
+            else:
+                if iterations == 3000 & i == 1499:
+                    i += 501 # jumps to the start of females
+                else:
+                    i += 1
 
-            if y_coord > line_y:  # above the line
+        for x in range(0, iterations): # 0 to 1000 or 3000
+            current_point = training_points.pop()
+            print(current_point)
+            y_coord = float(current_point[0])
+            x_coord = float(current_point[1])
+            answer = current_point[2]
+
+            if answer == 0: # 0 in data set is male
                 answer = 1
-                self.perceptron.train([x_coord, y_coord, 1], answer)
-            else:  # below the line
+            else:
                 answer = -1
-                self.perceptron.train([x_coord, y_coord, 1], answer)
+
+            self.perceptron.train([x_coord, y_coord, 1], answer)
+
         return self.perceptron  # return our trained perceptron
 
 
-
-data = open("data.txt")
-dataPoints = []
-i = 0
-while i < 4000:
-    dataLine = data.readline().strip("\n").split(",")
-    dataTuple = (dataLine.pop(0), dataLine.pop(0), dataLine.pop(0))
-    dataPoints.append(dataTuple)
-    i += 1
-
-print(len(dataPoints))
-
-# i = 0
-# while i < 4000:
-#     print(dataPoints[i])
-#     i += 1
-
-
 trainer = Trainer()
-p = trainer.train()
+p = trainer.train(3000)
 
-print("(-7, 9): " + str(p.feed_forward([-7, 9, 1])))
-print("(3, 1): " + str(p.feed_forward([3, 1, 1])))
+print("Female: " + str(p.feed_forward([56.35923863, 172.40367, 1])))
