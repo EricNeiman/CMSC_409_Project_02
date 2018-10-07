@@ -24,6 +24,7 @@ class Perceptron:
 
     def activate(self, num):
         # turn a sum over 0 into 1, and below 0 into -1
+        # hard activation function
         if num > 0:
             return 1
         return -1
@@ -85,8 +86,37 @@ class Trainer:
         return self.perceptron  # return our trained perceptron
 
 
-trainer = Trainer()
-p = trainer.train(3000)
+data = open("data.txt")
+max_w = 10.00000000
+min_w = 200.00000000
+max_h = 10.00000000
+min_h = 200.0000000
 
-print(p.weights)
-print("Female: " + str(p.feed_forward([56.35923863, 172.40367, 1])))
+
+i = 0
+while i < 4000:
+    line = data.readline().strip("\n").split(",")
+    height: float = line.pop(0)
+    weight: float = line.pop(0)
+    gender = line.pop(0)
+    if float(height) > max_h:
+        max_h = height
+    if float(height) < min_h:
+        min_h = height
+    if float(weight) > max_w:
+        max_w = weight
+    if float(weight) < min_w:
+        min_w = weight
+
+print("Max Height: " + max_h)
+print("Min Height: " + min_h)
+print("Max Weight: " + max_w)
+print("Min Weight: " + min_w)
+
+
+
+# trainer = Trainer()
+# p = trainer.train(1000)
+#
+# print(p.weights)
+# print("Female: " + str(p.feed_forward([56.35923863, 172.40367, 1])))
