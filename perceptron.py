@@ -1,6 +1,26 @@
 import numpy as np
 import matplotlib.pyplot as plt
+# import pandas as pd
+# from sklearn import preprocessing
 import random
+
+
+class DataCollector:
+
+    def __init__(self):
+        data = open("data.txt")
+        self.male_points = []
+        self.female_points = []
+
+        i = 0
+        while i < 4000:
+            data_line = data.readline().strip("\n").split(",")
+            data_tuple = (data_line.pop(0), data_line.pop(0), data_line.pop(0))
+            if i < 2000:
+                self.male_points.append(data_tuple)
+            else:
+                self.female_points.append(data_tuple)
+            i += 1
 
 
 class Perceptron:
@@ -10,24 +30,23 @@ class Perceptron:
 
         self.weights = []
         for x in range(0, num_weights):
-            self.weights.append(random.random() * 2 - 1)
+            self.weights.append(random.random() * 2 - 1)  # randomly assigns the weights
         # print(self.weights)
 
     def feed_forward(self, inputs):
         sum = 0.0
         # multiply inputs by weights and sum them
         for x in range(0, len(self.weights)):
-            # print(inputs[x])
             sum += self.weights[x] * inputs[x]
-        # return the 'activated' sum
-        return self.activate(sum)
+        return self.activate(sum)  # return the value from the soft/hard activation
 
     def activate(self, num):
-        # turn a sum over 0 into 1, and below 0 into -1
         # hard activation function
         if num > 0:
             return 1
         return -1
+        # soft activation function (tanh)
+        # return np.tanh(num)
 
     def train(self, inputs, desired_output):
         guess = self.feed_forward(inputs)
@@ -40,24 +59,11 @@ class Perceptron:
 class Trainer:
 
     def __init__(self):
-        self.perceptron = Perceptron(0.1, 3)
+        weights = 3
+        learning_rate = 0.1
+        self.perceptron = Perceptron(learning_rate, weights)
 
-    def train(self, iterations):
-        training_data = open("data.txt")
-        male_points = []
-        female_points = []
-
-        i = 0
-        while i < 4000:
-            data_line = training_data.readline().strip("\n").split(",")
-            data_tuple = (data_line.pop(0), data_line.pop(0), data_line.pop(0))
-            if i < 2000:
-                male_points.append(data_tuple)
-            else:
-                female_points.append(data_tuple)
-            i += 1
-            # print(data_tuple)
-
+    def train(self, iterations, male_points, female_points):
         i = 0
         while i < iterations:  # 0 to 1000 or 3000
             if iterations == 1000:
@@ -86,37 +92,14 @@ class Trainer:
         return self.perceptron  # return our trained perceptron
 
 
-data = open("data.txt")
-max_w = 10.00000000
-min_w = 200.00000000
-max_h = 10.00000000
-min_h = 200.0000000
+data = DataCollector()
 
-
-i = 0
-while i < 4000:
-    line = data.readline().strip("\n").split(",")
-    height: float = line.pop(0)
-    weight: float = line.pop(0)
-    gender = line.pop(0)
-    if float(height) > max_h:
-        max_h = height
-    if float(height) < min_h:
-        min_h = height
-    if float(weight) > max_w:
-        max_w = weight
-    if float(weight) < min_w:
-        min_w = weight
-
-print("Max Height: " + max_h)
-print("Min Height: " + min_h)
-print("Max Weight: " + max_w)
-print("Min Weight: " + min_w)
-
+print(data.male_points)
+print(data.female_points)
 
 
 # trainer = Trainer()
-# p = trainer.train(1000)
+# p = trainer.train(1000, data.male_points, data.female_points)
 #
 # print(p.weights)
 # print("Female: " + str(p.feed_forward([56.35923863, 172.40367, 1])))
