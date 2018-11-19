@@ -40,22 +40,22 @@ class Plot:
 
 class DataCollector:
     def __init__(self):
-        data = open("data.txt")
-        self.male_points = []
-        self.female_points = []
-        max_height = 87.
-        min_height = 45.
-        max_weight = 220.
-        min_weight = 153.
-        i = 0
-        while i < 4000:
+        day1 = open("./Project3_data/train_data_1.txt")
+        day2 = open("./Project3_data/train_data_2.txt")
+        day3 = open("./Project3_data/train_data_3.txt")
+        day4 = open("./Project3_data/test_data_4.txt")
+        self.data1 = self.populate_array(day1)
+        self.data2 = self.populate_array(day2)
+        self.data3 = self.populate_array(day3)
+        self.data4 = self.populate_array(day4)
+
+    def populate_array(self, data):
+        day = []
+        for i in range(0, 16):
             data_line = data.readline().strip("\n").split(",")
-            data_tuple = ((float(data_line.pop(0)) - min_height) / max_height, (float(data_line.pop(0)) - min_weight) / max_weight, data_line.pop(0))
-            if i < 2000:
-                self.male_points.append(data_tuple)
-            else:
-                self.female_points.append(data_tuple)
-            i += 1
+            data_tuple = data_line.pop(0), data_line.pop(0)
+            day.append(data_tuple)
+        return day
 
 
 class Perceptron:
@@ -116,18 +116,18 @@ class Trainer:
 
 
 data = DataCollector()
+print("Day 1")
+print(data.data1)
 
-# print(data.male_points)
-# print(data.female_points)
+print("\nDay 2")
+print(data.data2)
 
-m_training_points = data.male_points.copy()
-f_training_points = data.female_points.copy()
-trainer = Trainer()
-p = trainer.train(3000, m_training_points, f_training_points)
-pweights = p.weights.copy()
-xweight = pweights.pop(0)
-yweight = pweights.pop(0)
-bias = pweights.pop(0)
+print("\nDay 3")
+print(data.data3)
 
-plot = Plot(data.male_points, data.female_points, p.weights)
-print("y = (" + str(xweight) + "x + " + str(bias) + ") / " + str(yweight))
+print("\nTest Day")
+print(data.data4)
+
+
+
+
