@@ -24,13 +24,24 @@ class Plot:
             x4[i] = day4[i][0]
             y4[i] = day4[i][1]
 
-        # plt.plot(x, y, 'g--')
+        x = np.linspace(5, 20, 100)
+        if len(weights) == 2:
+            y = (weights[0] * x) + weights[1]
+            plt.title("Perceptron a")
+        if len(weights) == 3:
+            y = (weights[0] * x * x) + (weights[1] * x) + weights[2]
+            plt.title("Perceptron b")
+        if len(weights) == 4:
+            y = (weights[0] * x * x * x) + (weights[1] * x * x) + (weights[2] * x) + weights[3]
+            plt.title("Perceptron c")
 
+        plt.plot(x, y, 'r--')
+        plt.plot(x1, y1, 'ro', x2, y2, 'bo', x3, y3, 'yo')  # training data
+        plt.plot(x4, y4, 'go')  # testing data
         plt.ylim(0, 10)
         plt.xlim(5, 20)
         plt.ylabel('kiloWatts')
         plt.xlabel('hours')
-        plt.plot(x1, y1, 'ro', x2, y2, 'bo', x3, y3, 'yo', x4, y4, 'go')
         plt.show()
 
 
@@ -44,11 +55,12 @@ class DataCollector:
         self.data2 = self.populate_array(day2)
         self.data3 = self.populate_array(day3)
         self.data4 = self.populate_array(day4)
+        self.trainging_data = self.data1 + self.data2 + self.data3
 
     def populate_array(self, data):
         day = []
         for i in range(0, 16):
-            data_line = data.readline().strip("\n").split(",")
+            data_line = data.readline().strip("\n").split(", ")
             data_tuple = data_line.pop(0), data_line.pop(0)
             day.append(data_tuple)
         return day
@@ -63,62 +75,88 @@ class Perceptron:
         print(self.weights)
 
     def feed_forward(self, inputs):
-        sum = (self.weights[0] * inputs[0]) + (self.weights[1] * inputs[1]) + (self.weights[2] * inputs[2])
-        return self.activate(sum)  # return the value from the soft/hard activation
+        sum = 0
+        if len(self.weights) == 2:
+            sum = (self.weights[0] * inputs[0]) \
+                  + (self.weights[1] * inputs[1])
+        if len(self.weights) == 3:
+            sum = (self.weights[0] * inputs[0] * inputs[0]) \
+                  + (self.weights[1] * inputs[0]) \
+                  + (self.weights[2] * inputs[1])
+        if len(self.weights) == 4:
+            sum = (self.weights[0] * inputs[0] * inputs[0] * inputs[0]) \
+                  + (self.weights[1] * inputs[0] * inputs[0]) \
+                  + (self.weights[2] * inputs[0]) \
+                  + (self.weights[3] * inputs[1])
+
+        # for i in range(0, len(inputs)):
+        #     sum += self.weights[i] * inputs[i]
+        return self.activate(sum)  # return the value activation
 
     def activate(self, num):
-        # # hard activation function
-        if num > 0:
-            return 1
-        return 0
-        # # soft activation function (tanh)
-        # return np.tanh(num)
+        # linear activation f(x) = x
+        return num
 
     def train(self, inputs, desired_output):
         guess = self.feed_forward(inputs)
         error = desired_output - guess
 
-        for x in range(0, len(self.weights)):
-            self.weights[x] += error * inputs[x] * self.speed
+        if len(self.weights) == 2:
+            self.weights[0] += error * inputs[0] * self.speed
+            self.weights[1] += error * inputs[1] * self.speed
+        if len(self.weights) == 3:
+            self.weights[0] += error * inputs[0] * self.speed
+            self.weights[1] += error * inputs[0] * self.speed
+            self.weights[2] += error * inputs[1] * self.speed
+        if len(self.weights) == 4:
+            self.weights[0] += error * inputs[0] * self.speed
+            self.weights[1] += error * inputs[0] * self.speed
+            self.weights[2] += error * inputs[0] * self.speed
+            self.weights[3] += error * inputs[1] * self.speed
+        # for x in range(0, len(self.weights)):
+        #     self.weights[x] += error * inputs[x] * self.speed
+        # print(self.weights)
 
 
 class Trainer:
-    def __init__(self):
-        weights = 3
-        learning_rate = 0.01
+    def __init__(self, learning_rate, weights):
         self.perceptron = Perceptron(learning_rate, weights)
 
-    def train(self, iterations, male_points, female_points):
-        i = 0
-        while i < iterations:  # 0 to 1000 or 3000
-            if i % 2 == 0:
-                current_point = male_points.pop()
-            else:
-                current_point = female_points.pop()
-            y_coord = float(current_point[0])  # y coordinate is height in inches
-            x_coord = float(current_point[1])  # x coordinate is weight in pounds
-            answer = current_point[2]  # answer = 0 for male and 1 for female
-            if answer == 0:  # 0 in data set is male
-                answer = 1
-            else:  # 1 in the data set is female
-                answer = 0
-            self.perceptron.train([x_coord, y_coord, 1], answer)
-            i += 1
+    def train(self, iterations, training_data):
+        for j in range(0, iterations):  # trains the perceptron on the entire data set for the number of iterations
+            for i in range(0, len(training_data)):  # goes through the training data and trains the perceptron
+                y_coord = float(training_data[i][1])  # y coordinate is consumption in kiloWatts
+                x_coord = float(training_data[i][0])  # x coordinate is time in hours from 5am to 8pm
+                self.perceptron.train([x_coord, 1], y_coord)
         return self.perceptron  # return our trained perceptron
 
 
 data = DataCollector()
-print("Day 1")
-print(data.data1)
 
-print("\nDay 2")
-print(data.data2)
+# trainer_1 = Trainer(0.001, 2)  # creates a trainer with a learning rate of 0.01 and 2 weights
+# perceptron_1 = trainer_1.train(500, data.trainging_data)
+# print(perceptron_1.weights)
+# Plot(data.data1, data.data2, data.data3, data.data4, perceptron_1.weights)
+#
+# trainer_2 = Trainer(0.0001, 3)  # creates a trainer with a learning rate of 0.01 and 3 weights
+# perceptron_2 = trainer_2.train(10000, data.trainging_data)
+# print(perceptron_2.weights)
+# Plot(data.data1, data.data2, data.data3, data.data4, perceptron_2.weights)
 
-print("\nDay 3")
-print(data.data3)
+trainer_3 = Trainer(0.00001, 4)  # creates a trainer with a learning rate of 0.01 and 3 weights
+perceptron_3 = trainer_3.train(50000, data.trainging_data)
+print(perceptron_3.weights)
+Plot(data.data1, data.data2, data.data3, data.data4, perceptron_3.weights)
 
-print("\nTest Day")
-print(data.data4)
+# print("Training Data")
+# print(data.trainging_data)
+# print("Day 1")
+# print(data.data1)
+# print("Day 2")
+# print(data.data2)
+# print("Day 3")
+# print(data.data3)
+# print("Test Day")
+# print(data.data4)
 
-Plot(data.data1, data.data2, data.data3, data.data4, 0)
 
