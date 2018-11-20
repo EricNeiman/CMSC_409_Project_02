@@ -1,8 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
-# import pandas as pd
-# from sklearn import preprocessing
 import random
+
 
 class Plot:
     def __init__(self, male_points, female_points, weights):
@@ -25,8 +24,11 @@ class Plot:
             f_weights[i] = f_weight
             i += 1
 
+        x_weight = weights.pop(0)
+        y_weight = weights.pop(0)
+        bias = weights.pop(0)
         x = np.linspace(0, .3, 50)
-        y = ((weights.pop(0) * x) + weights.pop(0)) / weights.pop(0)
+        y = ((x_weight * x) + bias) / y_weight
 
         plt.plot(x, y, 'g--')
 
@@ -74,8 +76,8 @@ class Perceptron:
         # # hard activation function
         if num > 0:
             return 1
-        return -1
-        # soft activation function (tanh)
+        return 0
+        # # soft activation function (tanh)
         # return np.tanh(num)
 
     def train(self, inputs, desired_output):
@@ -89,7 +91,7 @@ class Perceptron:
 class Trainer:
     def __init__(self):
         weights = 3
-        learning_rate = 0.1
+        learning_rate = 0.01
         self.perceptron = Perceptron(learning_rate, weights)
 
     def train(self, iterations, male_points, female_points):
@@ -99,19 +101,15 @@ class Trainer:
                 current_point = male_points.pop()
             else:
                 current_point = female_points.pop()
-
-            # print(i)
-            # print(current_point)
             y_coord = float(current_point[0])  # y coordinate is height in inches
             x_coord = float(current_point[1])  # x coordinate is weight in pounds
             answer = current_point[2]  # answer = 0 for male and 1 for female
             if answer == 0:  # 0 in data set is male
                 answer = 1
             else:  # 1 in the data set is female
-                answer = -1
-            self.perceptron.train([x_coord, 1, y_coord], answer)
+                answer = 0
+            self.perceptron.train([x_coord, y_coord, 1], answer)
             i += 1
-
         return self.perceptron  # return our trained perceptron
 
 
@@ -127,7 +125,4 @@ print(data.data3)
 
 print("\nTest Day")
 print(data.data4)
-
-
-
 

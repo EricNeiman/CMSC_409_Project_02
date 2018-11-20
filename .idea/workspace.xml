@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="4eba5079-e90a-4bfe-ba7d-53273a649d8c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/CMSC_409_Project_02.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/CMSC_409_Project_02.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
@@ -14,6 +15,9 @@
       <change beforePath="$PROJECT_DIR$/sep_line_b.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/~$SC 409 Project 01.docx" beforeDir="false" />
     </list>
+=======
+    <list default="true" id="4eba5079-e90a-4bfe-ba7d-53273a649d8c" name="Default Changelist" comment="" />
+>>>>>>> b4e6f7fb481abd64ece1c663e71e451fe92deb07
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,17 +25,22 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
+<<<<<<< HEAD
     <SUITE FILE_PATH="coverage/CMSC_409_Project_02$perceptron.coverage" NAME="perceptron Coverage Results" MODIFIED="1542671636378" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+=======
+    <SUITE FILE_PATH="coverage/CMSC_409_Project_02$perceptron.coverage" NAME="perceptron Coverage Results" MODIFIED="1539012769606" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+>>>>>>> b4e6f7fb481abd64ece1c663e71e451fe92deb07
   </component>
   <component name="FUSProjectUsageTrigger">
     <session id="-1109225540">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="1" />
+          <entry key="project.closed" value="3" />
           <entry key="project.open.time.11" value="1" />
+          <entry key="project.open.time.2" value="1" />
           <entry key="project.open.time.4" value="1" />
-          <entry key="project.open.time.5" value="1" />
-          <entry key="project.opened" value="3" />
+          <entry key="project.open.time.5" value="3" />
+          <entry key="project.opened" value="6" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -50,14 +59,14 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="4968" />
+          <entry key="py" value="5315" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.js.language.service.starts" />
       <usages-collector id="statistics.vcs.git.usages" />
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="4968" />
+          <entry key="Python" value="5315" />
         </counts>
       </usages-collector>
     </session>
@@ -101,6 +110,7 @@
     </session>
   </component>
   <component name="FileEditorManager">
+<<<<<<< HEAD
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/perceptron.py">
@@ -142,6 +152,9 @@
         </entry>
       </file>
     </leaf>
+=======
+    <leaf />
+>>>>>>> b4e6f7fb481abd64ece1c663e71e451fe92deb07
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -178,6 +191,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -188,13 +202,16 @@
             <path>
               <item name="CMSC_409_Project_02" type="b2602c69:ProjectViewProjectNode" />
               <item name="CMSC_409_Project_02" type="462c0819:PsiDirectoryNode" />
+<<<<<<< HEAD
               <item name="Project3_data" type="462c0819:PsiDirectoryNode" />
+=======
+              <item name="venv" type="462c0819:PsiDirectoryNode" />
+>>>>>>> b4e6f7fb481abd64ece1c663e71e451fe92deb07
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -289,16 +306,27 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
+<<<<<<< HEAD
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13539445" />
+=======
+    <frame x="-8" y="-8" width="2576" height="1416" extended-state="6" />
+    <layout>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.13553259" />
+>>>>>>> b4e6f7fb481abd64ece1c663e71e451fe92deb07
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
+<<<<<<< HEAD
       <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.61208266" visible="true" weight="0.30368763" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3991323" />
+=======
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.61208266" weight="0.20358814" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.3978159" />
+>>>>>>> b4e6f7fb481abd64ece1c663e71e451fe92deb07
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -306,12 +334,20 @@
       <window_info anchor="bottom" id="Version Control" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
+<<<<<<< HEAD
       <window_info anchor="bottom" id="Terminal" order="11" weight="0.19848156" />
+=======
+      <window_info anchor="bottom" id="Terminal" order="11" visible="true" weight="0.19890796" />
+>>>>>>> b4e6f7fb481abd64ece1c663e71e451fe92deb07
       <window_info anchor="bottom" id="Python Console" order="12" sideWeight="0.38791734" weight="0.26677066" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+<<<<<<< HEAD
       <window_info anchor="right" id="SciView" order="3" visible="true" weight="0.23454158" />
+=======
+      <window_info anchor="right" id="SciView" order="3" visible="true" weight="0.3298887" />
+>>>>>>> b4e6f7fb481abd64ece1c663e71e451fe92deb07
       <window_info anchor="right" id="R Graphics" order="4" />
       <window_info anchor="right" id="R Packages" order="5" />
       <window_info anchor="right" id="Database" order="6" />
@@ -376,6 +412,7 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/Project3_data/train_data_2.txt">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -398,5 +435,9 @@
         </state>
       </provider>
     </entry>
+=======
+    <entry file="file://$PROJECT_DIR$/data.txt" />
+    <entry file="file://$PROJECT_DIR$/perceptron.py" />
+>>>>>>> b4e6f7fb481abd64ece1c663e71e451fe92deb07
   </component>
 </project>
