@@ -4,39 +4,33 @@ import random
 
 
 class Plot:
-    def __init__(self, male_points, female_points, weights):
-        m_heights = np.empty((2000, 1))
-        m_weights = np.empty((2000, 1))
-        f_heights = np.empty((2000, 1))
-        f_weights = np.empty((2000, 1))
+    def __init__(self, day1, day2, day3, day4, weights):
+        x1 = np.empty((16, 1))
+        y1 = np.empty((16, 1))
+        x2 = np.empty((16, 1))
+        y2 = np.empty((16, 1))
+        x3 = np.empty((16, 1))
+        y3 = np.empty((16, 1))
+        x4 = np.empty((16, 1))
+        y4 = np.empty((16, 1))
 
-        i = 0
-        while i < 2000:
-            m_tuple = male_points.pop(0)
-            m_height = m_tuple[0]
-            m_weight = m_tuple[1]
-            m_heights[i] = m_height
-            m_weights[i] = m_weight
-            f_tuple = female_points.pop(0)
-            f_height = f_tuple[0]
-            f_weight = f_tuple[1]
-            f_heights[i] = f_height
-            f_weights[i] = f_weight
-            i += 1
+        for i in range(0, 16):
+            x1[i] = day1[i][0]
+            y1[i] = day1[i][1]
+            x2[i] = day2[i][0]
+            y2[i] = day2[i][1]
+            x3[i] = day3[i][0]
+            y3[i] = day3[i][1]
+            x4[i] = day4[i][0]
+            y4[i] = day4[i][1]
 
-        x_weight = weights.pop(0)
-        y_weight = weights.pop(0)
-        bias = weights.pop(0)
-        x = np.linspace(0, .3, 50)
-        y = ((x_weight * x) + bias) / y_weight
+        # plt.plot(x, y, 'g--')
 
-        plt.plot(x, y, 'g--')
-
-        # plt.ylim(0, 1)
-        plt.xlim(0, 0.3)
-        plt.ylabel('Height (Inches)')
-        plt.xlabel('Weight (Pounds)')
-        plt.plot(m_weights, m_heights, 'ro', f_weights, f_heights, 'bo')
+        plt.ylim(0, 10)
+        plt.xlim(5, 20)
+        plt.ylabel('kiloWatts')
+        plt.xlabel('hours')
+        plt.plot(x1, y1, 'ro', x2, y2, 'bo', x3, y3, 'yo', x4, y4, 'go')
         plt.show()
 
 
@@ -125,4 +119,6 @@ print(data.data3)
 
 print("\nTest Day")
 print(data.data4)
+
+Plot(data.data1, data.data2, data.data3, data.data4, 0)
 
