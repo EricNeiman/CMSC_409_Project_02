@@ -128,17 +128,17 @@ class Trainer:
 
 data = DataCollector()
 
-trainer_1 = Trainer(0.001, 2)  # creates a trainer with a learning rate of 0.01 and 2 weights
-perceptron_1 = trainer_1.train(500, data.training_data)
-print(perceptron_1.weights)
-Plot(data.data1, data.data2, data.data3, data.data4, perceptron_1.weights)
+# trainer_1 = Trainer(0.001, 2)  # creates a trainer with a learning rate of 0.01 and 2 weights
+# perceptron_1 = trainer_1.train(500, data.training_data)
+# print(perceptron_1.weights)
+# Plot(data.data1, data.data2, data.data3, data.data4, perceptron_1.weights)
 
 trainer_2 = Trainer(0.0001, 3)  # creates a trainer with a learning rate of 0.01 and 3 weights
 perceptron_2 = trainer_2.train(100000, data.training_data)
 print(perceptron_2.weights)
 Plot(data.data1, data.data2, data.data3, data.data4, perceptron_2.weights)
 
-trainer_3 = Trainer(0.000001, 4)  # creates a trainer with a learning rate of 0.01 and 3 weights
-perceptron_3 = trainer_3.train(200000, data.training_data)
-print(perceptron_3.weights)
-Plot(data.data1, data.data2, data.data3, data.data4, perceptron_3.weights)
+# trainer_3 = Trainer(0.000001, 4)  # creates a trainer with a learning rate of 0.01 and 3 weights
+# perceptron_3 = trainer_3.train(200000, data.training_data)
+# print(perceptron_3.weights)
+# Plot(data.data1, data.data2, data.data3, data.data4, perceptron_3.weights)
