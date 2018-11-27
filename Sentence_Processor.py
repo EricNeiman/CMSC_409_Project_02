@@ -13,10 +13,12 @@ class SentenceProcessor:
         self.words = [[]]
         self.words[0].insert(0, "Keyword Set")
         self.book = Workbook()
+        self.reduced = Workbook()
 
         self.process_sentences()
 
         self.book.save("tdm.xlsx")
+        self.reduced.save("reduced_tdm.xlsx")
 
     def remove_characters(self):
         line = self.current
@@ -65,6 +67,33 @@ class SentenceProcessor:
                 # print(str(i) + " :" + str(j))
                 sheet.cell(row=(i + 1), column=(j + 1)).value = self.words[i][j]
 
+    def create_reduced(self):
+        sheet = self.reduced.active
+        for i in range(len(self.words)):
+            for j in range(len(self.words[0])):
+                # print(str(i) + " :" + str(j))
+                sheet.cell(row=(i + 1), column=(j + 1)).value = self.words[i][j]
+
+    def reduce_tdm(self):
+        print(self.words)
+        columns = []
+        columns.append("Totals")
+        for i in range(len(self.words[0]) - 1):
+            count = 0
+            for j in range(len(self.words) - 1):
+                if self.words[j + 1][i + 1] > 0:
+                    count = count + self.words[j + 1][i + 1]
+            columns.append(count)
+        # print(columns)
+        threshold = 3
+        i = len(columns) - 1
+        while i >= 1:
+            if columns[i] < threshold:
+                for j in range(len(self.words) - 1):
+                    del self.words[j][i]
+            i = i - 1
+        print(self.words)
+
     def process_sentences(self):
         for i in range(46):
             self.current = " " + self.sentences.readline()  # sets current to a line in sentences.txt
@@ -91,6 +120,8 @@ class SentenceProcessor:
         self.processed = open("processed.txt", "r", encoding="utf8")
         self.add_sentence_to_words()
         self.create_excel()
+        self.reduce_tdm()
+        self.create_reduced()
 
 
 sp = SentenceProcessor()
